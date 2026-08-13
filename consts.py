@@ -1,0 +1,5 @@
+import game_field
+RUNNING_STATE = 1
+WINDOW_WIDTH = 1280
+WINDOW_HEIGHT = 720
+
