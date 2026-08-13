@@ -1,4 +1,3 @@
-
 import pygame
 import consts
 import main
@@ -20,11 +19,3 @@ def draw_bombs(bomb):
 
 
 
-def draw_game(game_state):
-    screen.fill(consts.BACKGROUND_COLOR)
-
-    screen.blit(soldier, (main.soldiers.x, main.soldiers.y) )
-
-
-
-    pygame.display.update()

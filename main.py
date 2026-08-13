@@ -10,21 +10,27 @@ state = {
 }
 
 pygame.display.set_caption("capture the flag!")
+def draw_game(game_state):
+    Screen.screen.fill(consts.BACKGROUND_COLOR)
 
+    Screen.screen.blit(Screen.soldier, (game_state.x, game_state.y) )
+
+
+
+    pygame.display.update()
 
 def main():
     pygame.init()
-    soldiers=pygame.rect(0,0,consts.soldier_height,consts.soldier_width)
-
+    man = pygame.Rect(0,0,consts.soldier_width,consts.soldier_height)
     clock = pygame.time.Clock()
     while state["is_window_open"]:
         clock.tick(consts.FPS)
-        handle_user_events()
+        handle_user_events(man)
 
-        Screen.draw_game(state)
+        draw_game(man)
 
 
-def handle_user_events():
+def handle_user_events(man):
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:
@@ -35,8 +41,14 @@ def handle_user_events():
             continue
 
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_KP_ENTER:
-                pass
+            if event.key == pygame.K_DOWN:
+                man.y+=consts.move_length
+            if event.key == pygame.K_UP:
+                man.y-=consts.move_length
+            if event.key == pygame.K_RIGHT:
+                man.x+=consts.move_length
+            if event.key == pygame.K_LEFT:
+                man.x-=consts.move_length
 
 
 def is_win():

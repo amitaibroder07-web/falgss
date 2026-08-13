@@ -12,3 +12,4 @@ soldier_height=WINDOW_HEIGHT/25*2
 soldier_width=WINDOW_WIDTH/50*4
 BACKGROUND_COLOR = (0, 51, 0)
 FPS=60
+move_length=WINDOW_HEIGHT/25
