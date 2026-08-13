@@ -1,7 +1,7 @@
 
 RUNNING_STATE = 1
 bomb ="b"
-
+flag="F"
 
 
 RUNNING_STATE = 1
