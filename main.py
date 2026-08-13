@@ -1,18 +1,27 @@
 import pygame
 import consts
-import screen
+import Screen
 
 state = {
     "is_window_open": True,
     "is_on_boom": False,
     "state": consts.RUNNING_STATE,
-
+    "pressed_enter": False,
 }
+
+pygame.display.set_caption("capture the flag!")
 
 
 def main():
     pygame.init()
-    pass
+    soldiers=pygame.rect(0,0,consts.soldier_height,consts.soldier_width)
+
+    clock = pygame.time.Clock()
+    while state["is_window_open"]:
+        clock.tick(consts.FPS)
+        handle_user_events()
+
+        Screen.draw_game(state)
 
 
 def handle_user_events():
@@ -36,3 +45,7 @@ def is_win():
 
 def is_lose():
     pass
+
+
+if __name__ == "__main__":
+    main()
