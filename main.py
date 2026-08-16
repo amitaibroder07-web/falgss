@@ -3,7 +3,7 @@ import consts
 import Screen
 import soldier
 import game_field
-
+from game_field import is_dead
 
 state = {
     "is_window_open": True,
@@ -67,7 +67,9 @@ def handle_user_events(man):
             soldier.get_soldier_location(state["moved_up"],state["moved_down"],state["moved_left"],state["moved_right"])
             if event.key==pygame.K_RETURN:
                 state["pressed_enter"] = True
-            game_field.display_matrix(soldier.soldier_matrix)
+            if game_field.is_win():
+                print("gay")
+
 
 
 

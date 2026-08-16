@@ -2,6 +2,7 @@ from queue import Queue
 import copy
 import consts
 import random
+import soldier
 
 game_matrix=""
 def create_matrix():
@@ -111,13 +112,23 @@ def bomb_check():
     while True:
         findaway = is_there_way()
         if findaway:
-            return True
+            return game_matrix
         else:
             bomb_placement()
 
+def is_dead():
+    bomb_check()
+    for row in range(len(game_matrix)):
+        for col in range(len(game_matrix[row])):
+            if soldier.soldier_matrix[row][col] == consts.leg and game_matrix[row][col] == consts.bomb:
+                    return True
+def is_win():
+    bomb_check()
+    for row in range(len(game_matrix)):
+        for col in range(len(game_matrix[row])):
+            if soldier.soldier_matrix[row][col] == consts.body and game_matrix[row][col] == consts.flag:
+                return True
 
-
-    return soldier_matrix
 
 
 

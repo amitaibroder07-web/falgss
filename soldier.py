@@ -58,17 +58,6 @@ def get_soldier_location(up,down,left,right):
                     soldier_matrix[row][col] = ''
                     soldier_matrix[row -1][col] = consts.leg
                     soldier_matrix[row-4][col] = consts.body
-
-
-
-
-
-
-
-
-    pass
-
-
 def soldier_touch_flag(flag_location):
     pass
 
