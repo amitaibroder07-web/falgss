@@ -115,7 +115,7 @@ def bomb_check():
         else:
             bomb_placement()
 bomb_check()
-
+t=5+5
 
 
 
