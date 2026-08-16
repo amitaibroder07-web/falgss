@@ -1,17 +1,25 @@
 import pygame
 import consts
 import random
+import game_field
 
 screen = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
-screen_surface=pygame.Surface((consts.WINDOW_WIDTH,consts.WINDOW_HEIGHT))
+
 soldier_img = pygame.image.load("soldier.png")
 soldier_night_img = pygame.image.load("soldier_nigth.png")
+
 soldier = pygame.transform.scale(soldier_img, (consts.soldier_height,consts.soldier_width))
 soldier_night = pygame.transform.scale(soldier_night_img, (consts.soldier_height,consts.soldier_width))
+
 flag_img = pygame.image.load("flag.png")
 flag= pygame.transform.scale(flag_img, (consts.flag_width,consts.flag_height))
 bush_img = pygame.image.load("grass.png")
+
 bush= pygame.transform.scale(bush_img, (consts.flag_width,consts.flag_height))
+bomb_img=pygame.image.load("mine.png")
+bomb=pygame.transform.scale(bomb_img, (consts.BOMB_LENGTH,consts.BOMB_HEIGHT))
+
+bomb_locations=game_field.get_bomb_location()
 
 def change_screen(val,game_state):
     block=0
@@ -26,12 +34,15 @@ def change_screen(val,game_state):
             block+=consts.move_length
         screen.blit(soldier_night, (game_state.x, game_state.y))
         draw_flag()
+        draw_bombs(bomb_locations)
         pygame.display.update()
-        pygame.time.delay(1000)
+        pygame.time.delay(5000)
 
 
-def draw_bombs(matrix):
-    pass
+def draw_bombs(my_list):
+    for cords in my_list:
+        screen.blit(bomb,(cords[1]*consts.move_length,cords[0]*consts.move_length))
+
 
 def draw_game(game_state):
     screen.fill(consts.BACKGROUND_COLOR)
@@ -41,8 +52,6 @@ def draw_game(game_state):
 
 def draw_flag():
     screen.blit(flag,(consts.FLAG_X,consts.FLAG_Y))
-
-
 
 
 def draw_bush():

@@ -4,100 +4,102 @@ import consts
 import random
 import soldier
 
+game_matrix = ""
 
-game_matrix=""
+
 def create_matrix():
     global game_matrix
-    game_matrix = [50*[i for i in " "]for j in range(25)]
+    game_matrix = [50 * [i for i in " "] for j in range(25)]
     return game_matrix
+
 
 def flag_placement():
     global game_matrix
     create_matrix()
-    for row in range(21,24):
-        for col in range(46,50):
-            game_matrix[row][col]=consts.flag
+    for row in range(21, 24):
+        for col in range(46, 50):
+            game_matrix[row][col] = consts.flag
+
 
 def leg_placement():
     global game_matrix
     flag_placement()
-    for row in range(3,4):
+    for row in range(3, 4):
         for col in range(2):
-            game_matrix[row][col]=consts.leg
+            game_matrix[row][col] = consts.leg
+
 
 def upper_body():
     global game_matrix
     leg_placement()
     for row in range(3):
         for col in range(2):
-            game_matrix[row][col]=consts.body
+            game_matrix[row][col] = consts.body
+
 
 def bomb_placement():
     global game_matrix
     upper_body()
     for boom in range(20):
         while True:
-            row = random.randint(0,24)
-            col = random.randint(0,47)
-            empty_slots = all(game_matrix[row][col+i]==' 'for i in range(3))
+            row = random.randint(0, 24)
+            col = random.randint(0, 47)
+            empty_slots = all(game_matrix[row][col + i] == ' ' for i in range(3))
             if game_matrix[row][col] == consts.bomb:
                 continue
             elif empty_slots:
                 for i in range(3):
-                    game_matrix[row][col+i]=consts.bomb
+                    game_matrix[row][col + i] = consts.bomb
             else:
                 continue
             break
-
-
     return game_matrix
-
 
 
 def display_matrix(matrix):
     for row in matrix:
         print(row)
 
-#יש אופציה לכך שהפצצות יחסמו את הדרך לדגל כך שהשחקן לא יוכל להגיע ויפסיד אוטומטית
-#התייחסתי למקרה קצה הזה והשתמשתי בpathfinder ככה שבמקרה ולא יהיה דרך אחרי הפצצות אנחנו נכין מפה חדשה
+
+# יש אופציה לכך שהפצצות יחסמו את הדרך לדגל כך שהשחקן לא יוכל להגיע ויפסיד אוטומטית
+# התייחסתי למקרה קצה הזה והשתמשתי בpathfinder ככה שבמקרה ולא יהיה דרך אחרי הפצצות אנחנו נכין מפה חדשה
 def dictpathfinder():
     global game_matrix
     bomb_placement()
-    game_matrix_path=copy.deepcopy(game_matrix)
+    game_matrix_path = copy.deepcopy(game_matrix)
 
-    #סתם קראתי לו דיקט פשוט הייתיח צריך מילון שיחזיק את המשתנים
+    # סתם קראתי לו דיקט פשוט הייתיח צריך מילון שיחזיק את המשתנים
     dict1 = {}
-    matrix_size =len(game_matrix_path)
+    matrix_size = len(game_matrix_path)
     row_size = len(game_matrix[0])
 
     for row in range(matrix_size):
         for col in range(row_size):
-            if game_matrix_path[row][col]!=consts.bomb:
+            if game_matrix_path[row][col] != consts.bomb:
                 nodes = []
-                if row+1 < matrix_size and game_matrix_path[row+1][col] != consts.bomb:#down
-                    nodes.append((row+1,col))
-                if row-1 >= 0 and game_matrix_path[row-1][col] != consts.bomb:#up
-                    nodes.append((row-1,col))
-                if col+1 < row_size and game_matrix_path[row][col+1] != consts.bomb: #right
-                    nodes.append((row,col+1))
-                if col-1 >= 0 and game_matrix_path[row][col-1] != consts.bomb: #left
-                    nodes.append((row,col-1))
-                dict1[(row,col)] = nodes
-    return dict1,game_matrix_path
+                if row + 1 < matrix_size and game_matrix_path[row + 1][col] != consts.bomb:  # down
+                    nodes.append((row + 1, col))
+                if row - 1 >= 0 and game_matrix_path[row - 1][col] != consts.bomb:  # up
+                    nodes.append((row - 1, col))
+                if col + 1 < row_size and game_matrix_path[row][col + 1] != consts.bomb:  # right
+                    nodes.append((row, col + 1))
+                if col - 1 >= 0 and game_matrix_path[row][col - 1] != consts.bomb:  # left
+                    nodes.append((row, col - 1))
+                dict1[(row, col)] = nodes
+    return dict1, game_matrix_path
 
 
-testing=15
 
 
 
 def is_there_way():
     global game_matrix
-    dict1,game_matrix_path = dictpathfinder()
-#אנחנו מחפשים את הדרך הקצרה ביותר(ככה נתמודד עם מקרה הקצה לכן נבדוק אם היינו שם או לא
+    dict1, game_matrix_path = dictpathfinder()
+    # אנחנו מחפשים את הדרך הקצרה ביותר(ככה נתמודד עם מקרה הקצה לכן נבדוק אם היינו שם או לא
 
     start = (3, 1)
     werethere = [start]
-    end = (21,46)
+    end = (21, 46)
     q = Queue()
     q.put([start])
 
@@ -107,8 +109,8 @@ def is_there_way():
         for neighbor in neighbors:
             if neighbor == end:
                 for cooradinate in path:
-                    row,col = cooradinate
-                    game_matrix_path[row][col]='W'
+                    row, col = cooradinate
+                    game_matrix_path[row][col] = 'W'
                 return game_matrix_path
             if neighbor not in werethere:
                 werethere.append(neighbor)
@@ -125,12 +127,15 @@ def bomb_check():
         else:
             bomb_placement()
 
+
 def is_dead():
     bomb_check()
     for row in range(len(game_matrix)):
         for col in range(len(game_matrix[row])):
             if soldier.soldier_matrix[row][col] == consts.leg and game_matrix[row][col] == consts.bomb:
-                    return True
+                return True
+
+
 def is_win():
     bomb_check()
     for row in range(len(game_matrix)):
@@ -140,15 +145,14 @@ def is_win():
 
 
 
+def get_bomb_location():
+    bomb_check()
+    bomb_locations=[]
+    for row in range(len(game_matrix)):
+        for col in range(len(game_matrix[row])-2):
+            if all(game_matrix[row][col + i] == 'b' for i in range(3)):
+                bomb_locations.append((row,col))
 
+    return bomb_locations
 
-
-
-
-
-
-
-
-
-
-
+print(get_bomb_location())
