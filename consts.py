@@ -3,6 +3,7 @@ RUNNING_STATE = 1
 bomb ="b"
 flag="F"
 leg="L"
+body = "B"
 
 
 WINDOW_WIDTH = 1500

@@ -50,12 +50,8 @@ def bomb_placement():
 
 
 def display_matrix(matrix):
-    matrix_row=''
     for row in matrix:
-        for col in row:
-            matrix_row+=' '+ col
-        print(matrix_row)
-        matrix_row = ''
+        print(row)
 
 #יש אופציה לכך שהפצצות יחסמו את הדרך לדגל כך שהשחקן לא יוכל להגיע ויפסיד אוטומטית
 #התייחסתי למקרה קצה הזה והשתמשתי בpathfinder ככה שבמקרה ולא יהיה דרך אחרי הפצצות אנחנו נכין מפה חדשה
