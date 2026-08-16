@@ -4,6 +4,7 @@ import consts
 import random
 import soldier
 
+
 game_matrix=""
 def create_matrix():
     global game_matrix
@@ -16,18 +17,21 @@ def flag_placement():
     for row in range(21,24):
         for col in range(46,50):
             game_matrix[row][col]=consts.flag
+
 def leg_placement():
     global game_matrix
     flag_placement()
     for row in range(3,4):
         for col in range(2):
             game_matrix[row][col]=consts.leg
+
 def upper_body():
     global game_matrix
     leg_placement()
     for row in range(3):
         for col in range(2):
             game_matrix[row][col]=consts.body
+
 def bomb_placement():
     global game_matrix
     upper_body()
@@ -80,7 +84,12 @@ def dictpathfinder():
                     nodes.append((row,col-1))
                 dict1[(row,col)] = nodes
     return dict1,game_matrix_path
+
+
 testing=15
+
+
+
 def is_there_way():
     global game_matrix
     dict1,game_matrix_path = dictpathfinder()
@@ -128,6 +137,8 @@ def is_win():
         for col in range(len(game_matrix[row])):
             if soldier.soldier_matrix[row][col] == consts.body and game_matrix[row][col] == consts.flag:
                 return True
+
+
 
 
 
