@@ -42,4 +42,4 @@ def draw_flag():
 
 def draw_bush():
     for i in range(consts.NUMBER_OF_BUSH):
-        int_x=
+        pass

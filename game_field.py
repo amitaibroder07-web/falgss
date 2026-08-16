@@ -3,7 +3,6 @@ import copy
 import consts
 import random
 
-
 game_matrix=""
 def create_matrix():
     global game_matrix
@@ -22,9 +21,15 @@ def leg_placement():
     for row in range(3,4):
         for col in range(2):
             game_matrix[row][col]=consts.leg
-def bomb_placement():
+def upper_body():
     global game_matrix
     leg_placement()
+    for row in range(3):
+        for col in range(2):
+            game_matrix[row][col]=consts.body
+def bomb_placement():
+    global game_matrix
+    upper_body()
     for boom in range(20):
         while True:
             row = random.randint(0,24)
@@ -110,12 +115,14 @@ def bomb_check():
     while True:
         findaway = is_there_way()
         if findaway:
-            display_matrix(game_matrix)
             return True
         else:
             bomb_placement()
-bomb_check()
-t=5+5
+
+
+
+    return soldier_matrix
+
 
 
 
