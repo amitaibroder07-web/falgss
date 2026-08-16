@@ -8,6 +8,10 @@ state = {
     "is_on_boom": False,
     "state": consts.RUNNING_STATE,
     "pressed_enter": False,
+    "moved_right": False,
+    "moved_left": False,
+    "moved_up": False,
+    "moved_down": False,
 }
 
 pygame.display.set_caption("capture the flag!")
@@ -17,6 +21,7 @@ def main():
     pygame.init()
     clock = pygame.time.Clock()
     while state["is_window_open"]:
+        Screen.draw_flag()
         clock.tick(consts.FPS)
         handle_user_events(man)
 
@@ -43,8 +48,10 @@ def handle_user_events(man):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN and man.y+ consts.move_length <consts.WINDOW_HEIGHT - consts.soldier_height*1.5:
                 man.y+=consts.move_length
+
             if event.key == pygame.K_UP and man.y- consts.move_length >0-consts.soldier_height*0.5 :
                 man.y-=consts.move_length
+
             if event.key == pygame.K_RIGHT and man.x+ consts.move_length <consts.WINDOW_WIDTH- consts.soldier_width*0.25:
                 man.x+=consts.move_length
             if event.key == pygame.K_LEFT and man.x- consts.move_length >0 - consts.soldier_width*0.25 :
