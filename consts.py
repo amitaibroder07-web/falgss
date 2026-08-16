@@ -2,9 +2,9 @@
 RUNNING_STATE = 1
 bomb ="b"
 flag="F"
+leg="L"
 
 
-RUNNING_STATE = 1
 WINDOW_WIDTH = 1500
 WINDOW_HEIGHT = 750
 
