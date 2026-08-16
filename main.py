@@ -19,8 +19,14 @@ def main():
     while state["is_window_open"]:
         clock.tick(consts.FPS)
         handle_user_events(man)
+
+
+
         Screen.change_screen(state["pressed_enter"],man)
         state["pressed_enter"] = False
+
+
+
         Screen.draw_game(man)
 
 

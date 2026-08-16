@@ -1,16 +1,16 @@
+bomb = "b"
+flag = "F"
 
 RUNNING_STATE = 1
-bomb ="b"
-flag="F"
-leg="L"
-
-
 WINDOW_WIDTH = 1500
 WINDOW_HEIGHT = 750
 
-soldier_height=WINDOW_HEIGHT/25*2
-soldier_width=WINDOW_WIDTH/50*4
+soldier_height = WINDOW_HEIGHT / 25 * 2
+soldier_width = WINDOW_WIDTH / 50 * 4
 BACKGROUND_COLOR = (0, 51, 0)
-BACKGROUND_COLOR2 = (0, 51, 100)
-FPS=60
-move_length=WINDOW_HEIGHT/25
+BACKGROUND_COLOR2 = (0, 0, 0)
+LINE_COLOR = (127, 255, 212)
+FPS = 60
+move_length = WINDOW_HEIGHT / 25
+NUMBER_OF_BLOCKSX = 25
+NUMBER_OF_BLOCKSY = 50
