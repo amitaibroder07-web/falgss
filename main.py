@@ -30,7 +30,12 @@ def main():
         state["pressed_enter"] = False
         Screen.draw_game(man)
         if won():
+            print("won")
+        if lose():
+            print("lost")
             pygame.quit()
+
+
     clock.tick(consts.FPS)
 
 
@@ -68,12 +73,14 @@ def handle_user_events(man):
             state["moved_left"] = False
 
 def won():
-    if game_field.is_win():
-        state["state"] = consts.WIN_STATE
+    if game_field.is_win(game_field.now_game_matrix):
         return True
     return False
 
-
+def lose():
+    if game_field.is_dead(game_field.now_game_matrix):
+        return True
+    return False
 
 if __name__ == "__main__":
     main()

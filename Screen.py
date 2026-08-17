@@ -19,7 +19,7 @@ bush= pygame.transform.scale(bush_img, (consts.flag_width,consts.flag_height))
 bomb_img=pygame.image.load("mine.png")
 bomb=pygame.transform.scale(bomb_img, (consts.BOMB_LENGTH,consts.BOMB_HEIGHT))
 
-bomb_locations=game_field.get_bomb_location()
+bomb_locations=game_field.get_bomb_location(game_field.now_game_matrix)
 
 def change_screen(val,game_state):
     block=0
@@ -36,7 +36,7 @@ def change_screen(val,game_state):
         draw_flag()
         draw_bombs(bomb_locations)
         pygame.display.update()
-        pygame.time.delay(5000)
+        pygame.time.delay(1000)
 
 
 def draw_bombs(my_list):

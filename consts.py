@@ -1,6 +1,7 @@
 
 RUNNING_STATE = 1
 WIN_STATE = 2
+LOSE_STATE = 3
 bomb ="b"
 flag="F"
 leg="L"
